@@ -58,6 +58,7 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+set :keep_releases, 1
 
 #namespace :deploy do
 
