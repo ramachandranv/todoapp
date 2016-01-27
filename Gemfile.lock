@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/capistrano/rails.git
+  revision: 460d0cf5e6e234f4c84af9c6381435269bf7f167
+  specs:
+    capistrano-rails (1.1.6)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -48,9 +56,6 @@ GEM
     capistrano-bundler (1.1.4)
       capistrano (~> 3.1)
       sshkit (~> 1.2)
-    capistrano-rails (1.1.2)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
     capistrano-rvm (0.1.2)
       capistrano (~> 3.0)
       sshkit (~> 1.2)
@@ -171,7 +176,7 @@ DEPENDENCIES
   byebug
   capistrano
   capistrano-bundler
-  capistrano-rails
+  capistrano-rails!
   capistrano-rvm
   capistrano3-puma
   coffee-rails (~> 4.1.0)
