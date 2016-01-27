@@ -129,7 +129,7 @@ namespace :deploy do
 
   #before :starting,     :check_revision
   after  :finishing,    :compile_assets
-  after  :finishing,    :symlink_config_files
+  # after  :finishing,    :symlink_config_files
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
