@@ -110,7 +110,7 @@ namespace :deploy do
   #end
 
   task :symlink_config_files do
-      run "#{ try_sudo } ln -s #{ deploy_to }/config/database.yml #{ current_path }/config/database.yml"
+      run "ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
   end
 
   desc 'Initial Deploy'
@@ -130,7 +130,7 @@ namespace :deploy do
 
   #before :starting,     :check_revision
   after  :finishing,    :compile_assets
-  # after  :finishing,    :symlink_config_files
+  after  :finishing,    :symlink_config_files
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
