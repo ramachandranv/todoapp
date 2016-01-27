@@ -24,6 +24,7 @@ set :puma_bind,	      "tcp://127.0.0.1:9292"
 #set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
 set :puma_access_log, "/home/ubuntu/apps/todoapp/logs/puma-production.stderr.log"
 set :puma_error_log,  "/home/ubuntu/apps/todoapp/logs/puma-production.stdout.log"
+set :puma_conf,       "#{shared_path}/puma.rb"
 set :ssh_options,     { forward_agent: true, user: fetch(:user), auth_methods: ["password"] }#, keys: %w(~/.ssh/id_rsa.pub) }
 set :puma_preload_app, true
 set :puma_worker_timeout, nil
@@ -48,10 +49,10 @@ set :puma_init_active_record, true  # Change to false when not using ActiveRecor
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
+set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml')
 
 # Default value for linked_dirs is []
-# set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
+set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system')
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
