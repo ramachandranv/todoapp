@@ -50,5 +50,5 @@ test:
 production:
   <<: *default
   database: todoapp_production
-  username: todoapp
-  password: <%= ENV['TODOAPP_DATABASE_PASSWORD'] %>
+  username: root
+  password: password
