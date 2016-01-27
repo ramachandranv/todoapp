@@ -1,21 +1,22 @@
 # config valid only for current version of Capistrano
 lock '3.4.0'
 
-server '54.254.155.224', port: 22, roles: [:web, :app, :db], primary: true
+server 'ec2-54-254-155-224.ap-southeast-1.compute.amazonaws.com', port: 22, roles: [:web, :app, :db], primary: true
 
 set :application, 'todoapp'
-set :repository,  "."
-set :deploy_via, :copy
+# set :repository, "file:///home/ramachandran/ram/todoapp/.git"
+# set :local_repository, "file://."
+set :repo_url,  "git@github.com:ramachandranv/todoapp.git"
 #set :repo_url, 'ssh://ubuntu@54.254.155.224:/home/ubuntu/repos/todoapp.git'
 set :user,            'ubuntu'
-set :puma_threads,    [4, 16]
+#set :puma_threads,    [4, 16]
 set :puma_workers,    1
 
 # Don't change these unless you know what you're doing
 set :pty,             true
-set :use_sudo,        true
+set :use_sudo,        false
 set :stage,           :production
-#set :deploy_via,      :remote_cache
+set :deploy_via,      :copy
 set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}/public"
 set :puma_bind,	      "tcp://127.0.0.1:9292"
 #set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
@@ -106,6 +107,10 @@ namespace :deploy do
   #  end
   #end
 
+  task :symlink_config_files do
+      run "#{ try_sudo } ln -s #{ deploy_to }/shared/config/database.yml #{ current_path }/config/database.yml"
+  end
+
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
@@ -123,6 +128,7 @@ namespace :deploy do
 
   #before :starting,     :check_revision
   after  :finishing,    :compile_assets
+  after  :finishing,    :symlink_config_files
   after  :finishing,    :cleanup
   after  :finishing,    :restart
 end
